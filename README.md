@@ -21,6 +21,6 @@ Data will be downloaded in the ```irods_data``` directory.
     * Data level to download data for. 
         * Options = 0, 1, 2, 3, or 4 
 * -seq, --sequence (str, required)
-    * Unique sequence to use as a wild-card. 
+    * Unique sequence to use as a wildcard. 
 * -out, --outdir (str, optional)
     * Output directory. Default is ```irods_data```.
