@@ -16,7 +16,7 @@ Data will be downloaded in the ```irods_data``` directory.
         * Options = 10, 11, 12
 * -sen, --sensor (str, required)
     * Sensor to download data for.
-        * Options = FLIR, RGB, 3D, and PSII 
+        * Options = FLIR, RGB, 3D, and PS2
 *  -lev, --level (str, required)
     * Data level to download data for. 
         * Options = 0, 1, 2, 3, or 4 
