@@ -59,6 +59,7 @@ def get_args():
     return parser.parse_args()
 
 
+# --------------------------------------------------
 def get_dict():
     
     irods_dict = {
@@ -97,6 +98,8 @@ def get_file_list(data_path, sequence):
 
     return files
 
+
+# --------------------------------------------------
 def download_files(files):
 
     for item in files: 
