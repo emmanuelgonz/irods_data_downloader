@@ -113,7 +113,10 @@ def download_files(files):
                 sp.call(f'iget -KPVT {item}', shell=True)
 
                 if '.tar.gz' in item: 
-                    sp.call(f'tar -xzvf {os.path.basename(item)} -C {date}', shell=True)
+                    try:
+                        sp.call(f'tar -xzvf {os.path.basename(item)} -C {date}', shell=True)
+                    except:
+                        sp.call(f'tar -xvf {os.path.basename(item)} -C {date}', shell=True)
                     
                 elif '.tar' in item:
                     sp.call(f'tar -xvf {os.path.basename(item)} -C {date}', shell=True)
