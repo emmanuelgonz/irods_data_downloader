@@ -4,7 +4,7 @@
 This repo is meant to allow recursive downloads from [PhytoOracle's CyVerse Data Store](https://de.cyverse.org/data/ds/iplant/home/shared/phytooracle?selectedOrder=asc&selectedOrderBy=name&selectedPage=0&selectedRowsPerPage=100).
 
 ## Example: 
-To download all season 10 orthomosaics, you would need to the know the level in which these data are found and the unique sequence (wildcard). The command would be as follows: 
+To download all season 10 orthomosaics, you would need to the specify the level in which these data are found and the unique sequence (wildcard). The command would be as follows: 
 ```
 ./irods_download.py --season 10 --sensor RGB --level 1 --sequence cubic.tif
 ```
