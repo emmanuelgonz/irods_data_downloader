@@ -101,13 +101,30 @@ def get_file_list(data_path, sequence):
 
 # --------------------------------------------------
 def download_files(files):
-
+    
     for item in files: 
-        try:
-            sp.call(f'iget -KPVT {item}', shell=True)
+        
+        if not 'deprecated' in item:
 
-        except:
-            pass
+            try:
+                item = os.path.normpath(item)
+                date = item.split(os.sep)[-2]
+                os.makedirs(date)
+                sp.call(f'iget -KPVT {item}', shell=True)
+
+                if '.tar.gz' in item: 
+                    sp.call(f'tar -xzvf {os.path.basename(item)} -C {date}', shell=True)
+                    
+                elif '.tar' in item:
+                    sp.call(f'tar -xvf {os.path.basename(item)} -C {date}', shell=True)
+
+                else:
+                    continue
+                
+                sp.call(f'rm {os.path.basename(item)}', shell=True)
+
+            except:
+                pass
 
 
 # --------------------------------------------------
@@ -127,10 +144,11 @@ def main():
     print('Matches obtained.')
 
     # Prepare to download data.
-    if not os.path.isdir(args.outdir):
-        os.makedirs(args.outdir)
+    out_path = os.path.join(args.outdir, irods_dict['season'][args.season], irods_dict['sensor'][args.sensor])
+    if not os.path.isdir(out_path):
+        os.makedirs(out_path)
 
-    os.chdir(args.outdir)
+    os.chdir(out_path)
 
     # Download files.
     for item in files: 
