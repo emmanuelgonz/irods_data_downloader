@@ -8,7 +8,7 @@ To download all season 10 orthomosaics, you would need to the know the level in 
 ```
 ./irods_download.py --season 10 --sensor RGB --level 1 --sequence cubic.tif
 ```
-Data will be downloaded in the ```irods_data``` directory.
+Data will be downloaded in the ```irods_data/<season>/<sensor>/<date>``` directory by default, unless otherwise specified.
 
 ## Flags: 
 * -sea, --season (str, required)
