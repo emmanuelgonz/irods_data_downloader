@@ -114,7 +114,10 @@ def download_files(files):
 
                 if '.tar.gz' in item: 
 
-                    p = sp.call(f'tar -xzvf {os.path.basename(item)} -C {date}', shell=True)
+                    p = sp.call(f'tar -xzvf {os.path.basename(item)} -C {date}', shell=True, 
+                                                                                stdout=sp.PIPE, 
+                                                                                stderr=sp.PIPE)
+                                                                                
                     if p.returncode != 0:
 
                         sp.call(f'tar -xvf {os.path.basename(item)} -C {date}', shell=True)
