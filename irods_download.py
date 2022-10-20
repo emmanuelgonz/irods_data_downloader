@@ -100,7 +100,7 @@ def get_dict():
 # --------------------------------------------------
 def get_file_list(data_path, sequence):
 
-    result = sp.run(f'ilocate {os.path.join(data_path, "%", f"%{sequence}")}', stdout=sp.PIPE, shell=True)
+    result = sp.run(f'ilocate {os.path.join(data_path, "%", f"{sequence}")}', stdout=sp.PIPE, shell=True)
     files = result.stdout.decode('utf-8').split('\n')
 
     return files
