@@ -24,7 +24,7 @@ def get_args():
                         metavar='str',
                         type=str,
                         required=True, 
-                        choices=['10', '11', '12'])
+                        choices=['10', '11', '12', '13', '14'])
 
     parser.add_argument('-sen',
                         '--sensor',
