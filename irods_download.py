@@ -68,7 +68,9 @@ def get_dict():
         'season': {
             '10': 'season_10_lettuce_yr_2020',
             '11': 'season_11_sorghum_yr_2020',
-            '12': 'season_12_sorghum_soybean_sunflower_tepary_yr_2021'
+            '12': 'season_12_sorghum_soybean_sunflower_tepary_yr_2021',
+            '13': 'season_13_lettuce_yr_2022',
+            '14': 'season_14_sorghum_yr_2022'
         },
 
         'level': {
