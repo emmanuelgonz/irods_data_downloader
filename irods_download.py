@@ -60,7 +60,7 @@ def get_args():
                         '--crop',
                         help='Crop name.',
                         metavar='str',
-                        type=str
+                        type=str,
                         default=None)
     
     return parser.parse_args()
