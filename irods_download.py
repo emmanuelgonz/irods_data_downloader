@@ -59,7 +59,9 @@ def get_args():
     parser.add_argument('-c',
                         '--crop',
                         help='Crop name.',
-                        action='store_true')
+                        metavar='str',
+                        type=str
+                        default=None)
     
     return parser.parse_args()
 
