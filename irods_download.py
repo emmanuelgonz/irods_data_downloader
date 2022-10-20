@@ -55,7 +55,14 @@ def get_args():
                         metavar='str',
                         type=str,
                         default='irods_data')
-
+    
+    parser.add_argument('-c',
+                        '--crop',
+                        help='Crop name.',
+                        metavar='str',
+                        type=str,
+                        action='store_true')
+    
     return parser.parse_args()
 
 
@@ -144,7 +151,8 @@ def main():
 
     # Create iRODS path from components. 
     data_path = os.path.join(irods_dict['server_path'], irods_dict['season'][args.season], irods_dict['level'][args.level], irods_dict['sensor'][args.sensor])
-    
+    if args.crop:
+        data_path = os.path.join(irods_dict['server_path'], irods_dict['season'][args.season], irods_dict['level'][args.level], irods_dict['sensor'][args.sensor], args.crop)
     # Get list of all files that match a character sequence.
     print(f'Searching for files matching "{args.sequence}". Note: This process may take 1-5 minutes.')
     files = get_file_list(data_path, args.sequence)
