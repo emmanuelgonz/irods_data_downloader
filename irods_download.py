@@ -9,6 +9,8 @@ import argparse
 import os
 import sys
 import subprocess as sp
+import re
+from datetime import datetime
 
 # --------------------------------------------------
 def get_args():
@@ -109,42 +111,70 @@ def get_file_list(data_path, sequence):
 
 
 # --------------------------------------------------
-def download_files(files):
+def download_files(item, out_path):
+
     
-    for item in files: 
+    
+    # for item in files: 
         
-        if not 'deprecated' in item:
+    os.chdir(out_path)
+
+    if not 'deprecated' in item:
+
+        try:
+            item = os.path.normpath(item)
 
             try:
-                item = os.path.normpath(item)
-                date = item.split(os.sep)[-2]
+
+                match_str = re.search(r'\d{4}-\d{2}-\d{2}__\d{2}-\d{2}-\d{2}-\d{3}', item)
+                date = match_str.group()
+                # date = datetime.strptime(match_str.group(), '%Y-%m-%d').date()
+            except:
+                match_str = re.search(r'\d{4}-\d{2}-\d{2}', item)
+                date = datetime.strptime(match_str.group(), '%Y-%m-%d').date()
+                date = str(date)
+
+            print(f"Found item {item}.")
+
+            if not os.path.isdir(date):
+                print(f"Making directory {date}.")
                 os.makedirs(date)
+
+
+            if '.tar.gz' in item: 
+                print(f"Downloading {item}.")
                 sp.call(f'iget -KPVT {item}', shell=True)
 
-                if '.tar.gz' in item: 
+                print(f"Extracting {item}.")
+                ret = sp.call(f'tar -xzvf {os.path.basename(item)} -C {date}', shell=True)
 
-                    ret = sp.call(f'tar -xzvf {os.path.basename(item)} -C {date}', shell=True)
-
-                    if ret != 0:
-
-                        sp.call(f'tar -xvf {os.path.basename(item)} -C {date}', shell=True)
-                    
-                elif '.tar' in item:
+                if ret != 0:
+                    print(f"Reattempting to extract {item}.")
                     sp.call(f'tar -xvf {os.path.basename(item)} -C {date}', shell=True)
 
-                else:
-                    continue
-                
                 sp.call(f'rm {os.path.basename(item)}', shell=True)
 
-            except:
-                pass
+            elif '.tar' in item:
+                print(f"Downloading {item}.")
+                sp.call(f'iget -KPVT {item}', shell=True)
+                
+                print(f"Extracting {item}.")
+                sp.call(f'tar -xvf {os.path.basename(item)} -C {date}', shell=True)
+                sp.call(f'rm {os.path.basename(item)}', shell=True)
+
+            else:
+                os.chdir(date)
+                sp.call(f'iget -KPVT {item}', shell=True)
+            
+        except:
+            pass
 
 
 # --------------------------------------------------
 def main():
     """Download data here"""
     args = get_args()
+    cwd = os.getcwd()
 
     # Get dictionary to pull path components. 
     irods_dict = get_dict()
@@ -167,8 +197,8 @@ def main():
 
     # Download files.
     for item in files: 
-        print(f'Downloading {item}.')
-        download_files(files)
+        # print(f'Downloading {item}.')
+        download_files(item=item, out_path=os.path.join(cwd, out_path))
 
 
 # --------------------------------------------------
