@@ -6,7 +6,7 @@ This repo is meant to allow recursive downloads from [PhytoOracle's CyVerse Data
 ## Example: 
 To download all season 10 orthomosaics, you would need to the specify the level in which these data are found and the unique sequence (wildcard). The command would be as follows: 
 ```
-./irods_download.py --season 10 --sensor RGB --level 1 --sequence cubic.tif
+./irods_download.py --season 15 --sensor RGB --level 1 --sequence cubic.tif -c lettuce
 ```
 Data will be downloaded and uncompressed in the ```irods_data/<season>/<sensor>/<date>``` directory by default, unless otherwise specified. The original compressed (tarball) will be deleted to reduce storage space usage.
 
@@ -24,3 +24,5 @@ Data will be downloaded and uncompressed in the ```irods_data/<season>/<sensor>/
     * Unique sequence to use as a wildcard. 
 * -out, --outdir (str, optional)
     * Output directory. Default is ```irods_data```.
+* -c, --crop
+    * Crop name (lettuce, sorghum, etc.)    
