@@ -80,7 +80,8 @@ def get_dict():
             '12': 'season_12_sorghum_soybean_sunflower_tepary_yr_2021',
             '13': 'season_13_lettuce_yr_2022',
             '14': 'season_14_sorghum_yr_2022',
-            '15': 'season_15_lettuce_yr_2022'
+            '15': 'season_15_lettuce_yr_2022',
+            '16': 'season_16_sorghum_yr_2023'
         },
 
         'level': {
@@ -185,7 +186,7 @@ def main():
     if args.crop:
         data_path = os.path.join(irods_dict['server_path'], irods_dict['season'][args.season], irods_dict['level'][args.level], irods_dict['sensor'][args.sensor], args.crop)
     # Get list of all files that match a character sequence.
-    print(f'Searching for files matching "{os.path.join(data_path, args.sequence)}". Note: This process may take 1-5 minutes.')
+    print(f'Searching for files matching "{os.path.join(data_path, args.sequence)}". Note: This process may take a few minutes.')
     files = get_file_list(data_path, args.sequence)
     print('Matches obtained.')
 
